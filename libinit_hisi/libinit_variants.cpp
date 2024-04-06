@@ -37,16 +37,23 @@ ProductInfo ParseProductInfo(const std::string& product_info_str) {
     // Extract the model (i.e. "PRA-LX1").
     std::getline(iss, product_info.model, ' ');
 
-    // Extract the version (i.e. "9.1.0.311").
+    // Extract the version (i.e. "9.1.0.311") including parentheses if present.
     std::getline(iss, product_info.version, '(');
 
     // Remove trailing whitespace.
+    android::base::Trim(product_info.version);
+
+    // If version is enclosed in parentheses, extract the region_type.
     if (!product_info.version.empty() && product_info.version.back() == ')') {
         product_info.version.pop_back();
+
+        // Extract the region_type (i.e. "C185E3R2P1").
+        std::getline(iss, product_info.region_type, ')');
+
+        // Trim leading and trailing whitespaces from region_type.
+        android::base::Trim(product_info.region_type);
     }
 
-    // Extract the baseband (i.e. "C185E3R2P1").
-    std::getline(iss, product_info.region_type, ')');
     return product_info;
 }
 
