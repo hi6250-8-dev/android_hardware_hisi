@@ -18,3 +18,4 @@ service vendor.charger /vendor/bin/hw/android.hardware.health-service.hisi --cha
 
 on charger
     chown system system /dev/graphics/fb0
+    write /sys/class/leds/lcd_backlight0/trigger "Battery-charging-or-full"
