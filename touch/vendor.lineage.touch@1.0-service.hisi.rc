@@ -1,8 +1,0 @@
-on property:persist.sys.lineage_touch.enabled=*
-    restart fps_hal_ext
-
-service vendor.touch-hal-1-0 /vendor/bin/hw/vendor.lineage.touch@1.0-service.hisi
-    interface vendor.lineage.touch@1.0::IKeyDisabler default
-    class hal
-    user system
-    group system
